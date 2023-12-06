@@ -4,6 +4,12 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-image: linear-gradient(
+    to bottom,
+    #008ac1,
+    rgb(236, 234, 204) ,
+    rgb(179, 123, 43)
+  );
 }
 
 h1 {
@@ -23,25 +29,65 @@ h1 {
   position: relative;
   width: 650px;
   height: 650px;
+  margin: 0 auto;
   box-shadow: 10px 10px 15px rgb(4, 3, 3);
   border: 1px solid #000000;
   background-image: url(../western-shooting-gallery.png);
   background-size: cover;
 }
 
-.grid-container {
+#game__area :hover{
+  cursor: crosshair;
+}
+
+.target {
+  width: 20px; 
+  height: 20px; 
+  position: absolute;
+  background-color: red; 
+  border-radius: 50%; 
+  top: 64.5%; 
+  left: 79.5%; 
+  transform: translate(-50%, -50%); 
+  transition: all 0.5s ease-in-out; 
+}
+
+.target:hover {
+  background-color: green; 
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
+
+/* .grid-container {
   display: grid;
   grid-template-columns: repeat(11, 1fr);
   grid-template-rows: repeat(11, 1fr);
   padding: 10px;
 }
 .grid-item {
-  border: 1px solid rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(125, 67, 67, 0);
   padding: 10px;
   font-size: 30px;
-  text-align: center;
+  text-align: center; */
+/* } */
+
+#score__card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: rgb(12, 7, 2);
+  color: #ffffff;
+  font-size: 2rem;
+  line-height: 50px;
+  font-size: large;
 }
 
+#score__card--points{
+  justify-content: right;
+}
 
 @media (prefers-color-scheme: light) {
   :root {
