@@ -6,14 +6,14 @@ const gameMap = document.getElementById('game__area') as HTMLDivElement
 const gridContainer = document.querySelector('.grid-container') as HTMLDivElement
 const pointsCount = document.querySelector('#score__card--points') as HTMLDivElement
 const multiplierCard = document.querySelector('#score__card--multiplier') as HTMLDivElement
-
+const timerCard = document.querySelector('#score__card--timer') as HTMLDivElement
 
 // Error handling
 if (!gameMap || !gridContainer) {
     throw new Error('Game map not found')
 }
 
-if (!pointsCount) {
+if (!pointsCount || !multiplierCard || !timerCard) {
     throw new Error('Score card not found')
 }
 
@@ -55,6 +55,19 @@ const updateScore = () => {
     pointsCount.textContent = `Score: ${score .toString()}`
 }
 
+const gameTimer = () => {
+    let timeLeft: number = 60
+    const timer = setInterval(() => {
+        if (timeLeft <= 0) {
+            clearInterval(timer)
+            alert(`Game Over! Your score is ${score}`)
+        } else {
+            timeLeft -= 1
+            timerCard.textContent = `Time: ${timeLeft}`
+        }
+    }, 1000)
+}
+
 // Layout grid for targets
 // Should be part of startGame function
 const targetArray = targetMap()
@@ -76,6 +89,7 @@ const fixedRandomTarget = (): void => {
 
 // interval for randomTargets to appear
 // setInterval(fixedRandomTarget, 1400)
+// gameTimer()
 // setInterval(fixedRandomTarget, 1200)
 
 // eevent listener for shots
