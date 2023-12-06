@@ -58,22 +58,9 @@ h1 {
 }
 
 
-/* .grid-container {
-  display: grid;
-  grid-template-columns: repeat(11, 1fr);
-  grid-template-rows: repeat(11, 1fr);
-  padding: 10px;
-}
-.grid-item {
-  border: 1px solid rgba(125, 67, 67, 0);
-  padding: 10px;
-  font-size: 30px;
-  text-align: center; */
-/* } */
-
 #score__card {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   top: 0;
   left: 0;
   width: 100%;
@@ -87,6 +74,10 @@ h1 {
 
 #score__card--points{
   justify-content: right;
+}
+
+#score__card--multiplier {
+
 }
 
 @media (prefers-color-scheme: light) {
