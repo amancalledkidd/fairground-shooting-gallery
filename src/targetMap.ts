@@ -1,4 +1,4 @@
-interface TargetLocation {
+type TargetLocation = {
     x: number
     y: number
 }

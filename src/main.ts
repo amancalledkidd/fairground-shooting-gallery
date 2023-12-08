@@ -7,6 +7,7 @@ const gridContainer = document.querySelector('.grid-container') as HTMLDivElemen
 const pointsCount = document.querySelector('#score__card--points') as HTMLDivElement
 const multiplierCard = document.querySelector('#score__card--multiplier') as HTMLDivElement
 const timerCard = document.querySelector('#score__card--timer') as HTMLDivElement
+const gunShot = document.querySelector('#gunshot') as HTMLAudioElement
 
 // Error handling
 if (!gameMap || !gridContainer) {
@@ -16,11 +17,20 @@ if (!gameMap || !gridContainer) {
 if (!pointsCount || !multiplierCard || !timerCard) {
     throw new Error('Score card not found')
 }
+if (!gunShot) {
+    throw new Error('Gunshot sound not found')
+}
 
 let score: number = 0
 let shots: number = 0
 let hits: number = 0
 let multiplier: number = 1
+
+const startGame = () => {
+    gameTimer()
+    setInterval(fixedRandomTarget, 1200)
+}
+
 
 const getMultiplier = () => {
     let htmlText = `Multiplier: x${multiplier}`
@@ -39,6 +49,7 @@ const getMultiplier = () => {
 const handleShot = (event: MouseEvent) => {
     const target = event.target as HTMLDivElement
     shots += 1
+    playSound()
     if (target.classList.contains('target')) {
         target.remove()
         getMultiplier()
@@ -49,6 +60,11 @@ const handleShot = (event: MouseEvent) => {
     else {
         hits = 0
     }
+}
+
+const playSound = () => {
+    gunShot.volume = 0.1
+    gunShot.play()
 }
 
 const updateScore = () => {
@@ -64,6 +80,7 @@ const gameTimer = () => {
         } else {
             timeLeft -= 1
             timerCard.textContent = `Time: ${timeLeft}`
+            return "gameOver"
         }
     }, 1000)
 }
@@ -85,12 +102,20 @@ const fixedRandomTarget = (): void => {
     gameMap.appendChild(targetElement);
 }
 
-
+const ufoMovingTarget = (): void => {
+    setInterval(() => {
+        const targetElement = document.createElement('div');
+        targetElement.classList.add('alien');
+        targetElement.style.left = `${Math.floor(Math.random() * 100)}%`;
+        targetElement.style.top = `15%`;
+        gameMap.appendChild(targetElement);
+}, 100)
+}
 
 // interval for randomTargets to appear
 // setInterval(fixedRandomTarget, 1400)
-// gameTimer()
+// startGame()
 // setInterval(fixedRandomTarget, 1200)
-
+// ufoMovingTarget()
 // eevent listener for shots
 gameMap.addEventListener('click', handleShot)
