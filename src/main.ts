@@ -49,8 +49,9 @@ const getMultiplier = () => {
 const handleShot = (event: MouseEvent) => {
     const target = event.target as HTMLDivElement
     shots += 1
-    playSound()
+    playSoundShot()
     if (target.classList.contains('target')) {
+        playSoundHit()
         target.remove()
         getMultiplier()
         score += 10 * multiplier
@@ -62,9 +63,17 @@ const handleShot = (event: MouseEvent) => {
     }
 }
 
-const playSound = () => {
+const playSoundShot = () => {
     gunShot.volume = 0.1
+    gunShot.currentTime = 0
     gunShot.play()
+}
+
+const playSoundHit = () => {
+    const hit = document.querySelector('#hit') as HTMLAudioElement
+    hit.volume = 0.2
+    hit.currentTime = 0
+    hit.play()
 }
 
 const updateScore = () => {
@@ -104,17 +113,22 @@ const fixedRandomTarget = (): void => {
 
 const ufoMovingTarget = (): void => {
     setInterval(() => {
+        const alien = document.querySelector('.alien') as HTMLDivElement
+        if (alien) {
+            alien.remove()
+        }
+        
         const targetElement = document.createElement('div');
         targetElement.classList.add('alien');
         targetElement.style.left = `${Math.floor(Math.random() * 100)}%`;
         targetElement.style.top = `15%`;
         gameMap.appendChild(targetElement);
-}, 100)
+}, 700)
 }
 
 // interval for randomTargets to appear
 // setInterval(fixedRandomTarget, 1400)
-// startGame()
+startGame()
 // setInterval(fixedRandomTarget, 1200)
 // ufoMovingTarget()
 // eevent listener for shots
