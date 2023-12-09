@@ -60,42 +60,80 @@ export const targetMap= (): TargetLocation[] => {
     return targetArray
 }
 
+export const randomScatterTarget = (targetType: string, top: number, left: number): void => {
+    setInterval(() => {
+        const target = document.querySelector(`.${targetType}`) as HTMLDivElement
+        if (target) {
+            target.remove()
+        }
+        
+        const targetElement = document.createElement('img');
+        targetElement.src = "../assets/glass-bottle.png";
+        targetElement.classList.add(targetType);
+        targetElement.style.left = `${Math.floor(Math.random() * left)}%`;
+        targetElement.style.top = `${Math.floor(Math.random() * top)}%`;
+        gameMap.appendChild(targetElement);
+}, 700)
+}
+
+
+
+
 // Function for moving targets, 
 // options is vertical or horizontal( V or H), targetNum is number of targets and targetType for different styles of targets
-export const movingTarget = (targetType: string, targetNum: number, options: "V" | "H"): void => {
+export const movingTarget = (
+    targetType: string, 
+    targetNum: number, 
+    options: "V" | "H", 
+    horizontalSpread: number = 5, 
+    verticalSpread: number = 10,
+    speed: number = 0.5
+): void => {
+
     for (let i = 1; i < targetNum + 1; i++) {
         const targetElement = document.createElement('div');
         targetElement.classList.add(targetType);
-        targetElement.style.left = `${i * 4}%`;
-        targetElement.style.top = `${i * 10}%`;
-        gameMap.appendChild(targetElement);
+        if (options === "H") {
+            targetElement.style.left = `${i * horizontalSpread}%`;
+            targetElement.style.top = `${verticalSpread}%`;
+        } else {
+            targetElement.style.left = `${horizontalSpread}%`;
+            targetElement.style.top = `${i * verticalSpread}%`;
+        }
 
-        targetAnimation(targetElement, options)
+        gameMap.appendChild(targetElement);
+        targetAnimation(targetElement, options, speed)
     }
 }
 
-const targetAnimation = (target: HTMLElement, options: "V" | "H"): void => {
+
+
+const targetAnimation = (target: HTMLElement, options: "V" | "H", speed: number): void => {
     let direction: number = 1
-    let speed: number = 0.5
 
     const move = (): void => {
         // parseFloat not int... need decimals for more speed control
-        const currentTop = parseFloat(target.style.top)
+        let currentPosition: number;
+        if (options === "V") {
+            currentPosition = parseFloat(target.style.top)
+        } else {
+            currentPosition = parseFloat(target.style.left)
+        }
         // under 100 or over 0, reverse direction
         // over 100% allows for target to be removed from DOM, then return creates more space for additional targets
-        if (currentTop > 120 || currentTop < 0) {
+        if (currentPosition > 120 || currentPosition < -20) {
             direction *= -1
         }
-        if (options === "V") {
-            target.style.top = `${currentTop + speed * direction}%`
-        } else {
-            target.style.left = `${currentTop + speed * direction}%`
-        }
 
-    target.style.top = `${currentTop + speed * direction}%`
-    // Use requestAnimationFrame to animate, not setInterval, as uses refresh rate as interval
-    // initally a callback function, but needed to be recursive
-    requestAnimationFrame(move)
+
+        if (options === "V") {
+            target.style.top = `${currentPosition + speed * direction}%`
+        } else {
+            target.style.left = `${currentPosition + speed * direction}%`
+        }
+        // Use requestAnimationFrame to animate, not setInterval, as uses refresh rate as interval
+        // initally a callback function, but needed to be recursive
+        requestAnimationFrame(move)
     }
     // recursive function, calls itself, which allows for constant animation
     move();
