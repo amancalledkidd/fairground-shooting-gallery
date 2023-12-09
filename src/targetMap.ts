@@ -1,7 +1,20 @@
+const gameMap = document.getElementById('game__area') as HTMLDivElement
+const gridContainer = document.querySelector('.grid-container') as HTMLDivElement
+
+if (!gameMap || !gridContainer) {
+    throw new Error('Game map not found')
+}
+
+
+
+
+
 type TargetLocation = {
     x: number
     y: number
 }
+
+
 
 export const fixedTargetArray: TargetLocation[] = [
     { x: 49.5, y: 69 },
@@ -45,4 +58,45 @@ export const targetMap= (): TargetLocation[] => {
         }
     }
     return targetArray
+}
+
+// Function for moving targets, 
+// options is vertical or horizontal( V or H), targetNum is number of targets and targetType for different styles of targets
+export const movingTarget = (targetType: string, targetNum: number, options: "V" | "H"): void => {
+    for (let i = 1; i < targetNum + 1; i++) {
+        const targetElement = document.createElement('div');
+        targetElement.classList.add(targetType);
+        targetElement.style.left = `${i * 4}%`;
+        targetElement.style.top = `${i * 10}%`;
+        gameMap.appendChild(targetElement);
+
+        targetAnimation(targetElement, options)
+    }
+}
+
+const targetAnimation = (target: HTMLElement, options: "V" | "H"): void => {
+    let direction: number = 1
+    let speed: number = 0.5
+
+    const move = (): void => {
+        // parseFloat not int... need decimals for more speed control
+        const currentTop = parseFloat(target.style.top)
+        // under 100 or over 0, reverse direction
+        // over 100% allows for target to be removed from DOM, then return creates more space for additional targets
+        if (currentTop > 120 || currentTop < 0) {
+            direction *= -1
+        }
+        if (options === "V") {
+            target.style.top = `${currentTop + speed * direction}%`
+        } else {
+            target.style.left = `${currentTop + speed * direction}%`
+        }
+
+    target.style.top = `${currentTop + speed * direction}%`
+    // Use requestAnimationFrame to animate, not setInterval, as uses refresh rate as interval
+    // initally a callback function, but needed to be recursive
+    requestAnimationFrame(move)
+    }
+    // recursive function, calls itself, which allows for constant animation
+    move();
 }
