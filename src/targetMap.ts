@@ -41,7 +41,8 @@ export const randomScatterTarget = (
     targetType: string, 
     top: number, 
     left: number,
-    img: boolean = false
+    img: boolean = false,
+    interval: number = 700
 ): void => {
     setInterval(() => {
         const target = document.querySelector(`.${targetType}`) as HTMLDivElement
@@ -61,7 +62,7 @@ export const randomScatterTarget = (
         targetElement.style.left = `${Math.floor(Math.random() * left)}%`;
         targetElement.style.top = `${Math.floor(Math.random() * top)}%`;
         gameMap.appendChild(targetElement);
-}, 700)
+}, interval)
 }
 
 const imageTarget = (targetType: string): HTMLImageElement => {
