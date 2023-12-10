@@ -6,14 +6,10 @@ if (!gameMap || !gridContainer) {
 }
 
 
-
-
-
 type TargetLocation = {
     x: number
     y: number
 }
-
 
 
 export const fixedTargetArray: TargetLocation[] = [
@@ -41,43 +37,39 @@ export const fixedTargetArray: TargetLocation[] = [
     { x: 64.5, y: 79.5 }
 ]
 
-const rows: number = 5
-const cols: number = 0
-const targetSize: number = 10
-
-export const targetMap= (): TargetLocation[] => {
-    const targetArray: TargetLocation[] = [] 
-    const spacingX = (650 - cols * targetSize) / (cols + 1);
-    const spacingY = (650 - rows * targetSize) / (rows + 1);
-    
-    for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < cols; j++) {
-            const x = j * (targetSize + spacingX) + spacingX;
-            const y = i * (targetSize + spacingY) + spacingY;
-            targetArray.push({ x, y });
-        }
-    }
-    return targetArray
-}
-
-export const randomScatterTarget = (targetType: string, top: number, left: number): void => {
+export const randomScatterTarget = (
+    targetType: string, 
+    top: number, 
+    left: number,
+    img: boolean = false
+): void => {
     setInterval(() => {
         const target = document.querySelector(`.${targetType}`) as HTMLDivElement
         if (target) {
             target.remove()
+        } 
+
+        let targetElement: HTMLImageElement | HTMLDivElement
+
+        if (img) {
+            targetElement = imageTarget(targetType) as HTMLImageElement
+        } else {
+            targetElement = document.createElement('div')
+            targetElement.classList.add(targetType) 
         }
-        
-        const targetElement = document.createElement('img');
-        targetElement.src = "../assets/glass-bottle.png";
-        targetElement.classList.add(targetType);
+
         targetElement.style.left = `${Math.floor(Math.random() * left)}%`;
         targetElement.style.top = `${Math.floor(Math.random() * top)}%`;
         gameMap.appendChild(targetElement);
 }, 700)
 }
 
-
-
+const imageTarget = (targetType: string): HTMLImageElement => {
+    const targetElement = document.createElement('img');
+    targetElement.src = `../assets/${targetType}.png`;
+    targetElement.classList.add(targetType);
+    return targetElement
+}
 
 // Function for moving targets, 
 // options is vertical or horizontal( V or H), targetNum is number of targets and targetType for different styles of targets
@@ -87,12 +79,21 @@ export const movingTarget = (
     options: "V" | "H", 
     horizontalSpread: number = 5, 
     verticalSpread: number = 10,
-    speed: number = 0.5
+    speed: number = 0.5,
+    image: boolean = false
 ): void => {
 
     for (let i = 1; i < targetNum + 1; i++) {
-        const targetElement = document.createElement('div');
-        targetElement.classList.add(targetType);
+
+        let targetElement: HTMLImageElement | HTMLDivElement
+
+        if (image) {
+            targetElement = imageTarget(targetType) as HTMLImageElement;
+        } else {
+            targetElement = document.createElement('div') as HTMLDivElement;
+            targetElement.classList.add(targetType);
+        }
+        
         if (options === "H") {
             targetElement.style.left = `${i * horizontalSpread}%`;
             targetElement.style.top = `${verticalSpread}%`;
