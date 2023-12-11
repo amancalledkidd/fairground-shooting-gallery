@@ -35,7 +35,7 @@ export const randomScatterTarget = (
 
 const imageTarget = (targetType: string): HTMLImageElement => {
     const targetElement = document.createElement('img');
-    targetElement.src = `../assets/${targetType}.png`;
+    targetElement.src = `../assets/images/${targetType}.png`;
     targetElement.classList.add(targetType);
     return targetElement
 }

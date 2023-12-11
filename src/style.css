@@ -10,7 +10,10 @@ html {
   scroll-behavior: smooth
 }
 
-
+.heading {
+  height: auto;
+  width: 100%;
+}
 
 body {
   height: 100%;
@@ -26,6 +29,7 @@ h1 {
   font-size: 2em;
   line-height: 1.1;
   color: #f9f9f9;
+  margin: 0%;
 }
 
 #app {
@@ -41,12 +45,12 @@ h1 {
 
 #game__area {
   position: relative;
-  width: 85vw;
+  width: 82vw;
   height: 60vh;
   border: 2px solid #000000;
   background: #747bff;
   margin: 10px;
-  background-image: url("../assets/medium-shooter.webp");
+  background-image: url("../assets//backgrounds/large-shooter.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center;
@@ -133,7 +137,7 @@ h1 {
   background-color: #f9f9f9;
   color: #000000;
   font-size: 1.2rem;
-  margin: 10px;
+  margin-top: 3px;
   justify-content: center;
 }
 
@@ -167,10 +171,10 @@ h1 {
 @media screen and (max-width: 600px) {
   #game__area {
     width: 95%; 
-    height: 64vh; 
+    height: 61vh; 
     max-height: none;
     max-width: none;
-    background: url(../assets/phone-shooter.png);
+    background: url(../assets/backgrounds/phone-shooter.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
   }
@@ -183,9 +187,12 @@ h1 {
 @media screen and (min-width: 600px) and (max-width: 900px){
   #game__area {
     width: 95%; 
-    height: 70vh; 
+    height: 62vh; 
     max-height: none; 
     max-width: none;
+    background: url('../assets/backgrounds/medium-shooter.webp');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
   }
     
 }
@@ -193,10 +200,10 @@ h1 {
 @media screen and (min-width: 900px) and (max-width: 1440px){
   #game__area {
     width: 95%; 
-    height: 75vh; 
+    height: 65vh; 
     max-height: none;
     max-width: none;
-    background: url('../assets/large-shooter.png');
+    background: url('../assets/backgrounds/large-shooter.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
   }
