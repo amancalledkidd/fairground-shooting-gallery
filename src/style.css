@@ -25,6 +25,7 @@ body {
 h1 {
   font-size: 2em;
   line-height: 1.1;
+  color: #f9f9f9;
 }
 
 #app {
@@ -71,6 +72,17 @@ h1 {
   z-index: 2;
 }
 
+.sp-target {
+  width: 5%; 
+  height: 5%;
+  max-width: 50px; 
+  aspect-ratio: 1/1;
+  position: absolute;
+  border-radius: 50%; 
+  cursor: crosshair;
+  z-index: 1;
+
+}
 .bottle {
   width: 7%; 
   height: 7%;
@@ -91,7 +103,7 @@ h1 {
   top: 64.5%; 
   left: 79.5%; 
   transform: translate(-50%, -50%); 
-  transition: all 0.5s ease-in-out; 
+  transition: all 1.5s ease-in-out; 
   z-index: 0;
 }
 
@@ -114,8 +126,29 @@ h1 {
   justify-content: right;
 }
 
-#score__card--multiplier {
 
+.button {
+  border-radius: 20px;
+  border: 2px solid #000000;
+  background-color: #f9f9f9;
+  color: #000000;
+  font-size: 1.2rem;
+  margin: 10px;
+  justify-content: center;
+}
+
+.button:hover {
+  background-color: #93230d;
+  color: #f9f9f9;
+  cursor: pointer;
+}
+.final__score {
+  border: 2px solid whitesmoke;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: black;
 }
 
 @media (prefers-color-scheme: light) {

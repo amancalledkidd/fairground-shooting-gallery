@@ -8,9 +8,11 @@
   </head>
   <body>
     <div id="app">
-      <heading>Point and shoot</heading>
+      <heading>
+        <h1>Target.Array</h1>
+      </heading>
       <div id="game__area">
-        <div class="target" id="target1"></div>
+        
         <div class="grid-container"></div>
       </div>
       <div id="score__card">
@@ -19,11 +21,12 @@
         <div id="score__card--multiplier">Multiplier: x1</div>
       </div>
       <div id="game__over">
-        <button id="start__button">Start</button>
+        <button class="button" id="start__button">Start</button>
       </div>
     <audio id="gunshot" src="./assets/gunshot.mp3"></audio>
     <audio id="hit" src="./assets/light-hit-metal.mp3"></audio>
     <audio id="glasshit" src="./assets/glass-smash.mp3"></audio>
+    <audio id="ufohit" src="./assets/ufo-sound.mp3"></audio>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
