@@ -1,4 +1,4 @@
-# Target.Array (Fairground Gallery Shooter)
+# Shooting Array (Fairground Gallery Shooter)
 
 ## Idea
 
