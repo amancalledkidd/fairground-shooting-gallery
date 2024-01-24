@@ -10,9 +10,16 @@ export const randomScatterTarget = (
     top: number, 
     left: number,
     img: boolean = false,
-    interval: number = 700
+    interval: number = 700,
+    iterations: number = 20
 ): void => {
-    setInterval(() => {
+    let count = 0;
+    const intervalId = setInterval(() => {
+        if (count > iterations) {
+            clearInterval(intervalId)
+            return;
+        }
+
         const target = document.querySelector(`.${targetType}`) as HTMLDivElement
         if (target) {
             target.remove()
@@ -30,12 +37,14 @@ export const randomScatterTarget = (
         targetElement.style.left = `${Math.floor(Math.random() * left)}%`;
         targetElement.style.top = `${Math.floor(Math.random() * top)}%`;
         gameMap.appendChild(targetElement);
+
+        count += 1;
 }, interval)
 }
 
 const imageTarget = (targetType: string): HTMLImageElement => {
     const targetElement = document.createElement('img');
-    targetElement.src = `../assets/images/${targetType}.png`;
+    targetElement.src = `../assets/images/${targetType}.webp`;
     targetElement.classList.add(targetType);
     return targetElement
 }
