@@ -1,9 +1,16 @@
+import bottle from '../assets/images/bottle.webp'
+import ufo from '../assets/images/ufo.webp'
+
 const gameMap = document.getElementById('game__area') as HTMLDivElement
 const gridContainer = document.querySelector('.grid-container') as HTMLDivElement
 
 if (!gameMap || !gridContainer) {
     throw new Error('Game map not found')
 }
+
+// type targetType = {
+//     'bottle' | 'ufo' | 'target'
+// }
 
 export const randomScatterTarget = (
     targetType: string, 
@@ -44,8 +51,16 @@ export const randomScatterTarget = (
 
 const imageTarget = (targetType: string): HTMLImageElement => {
     const targetElement = document.createElement('img');
-    targetElement.src = `../assets/images/${targetType}.webp`;
-    targetElement.classList.add(targetType);
+    if (targetType == 'ufo') {
+        targetElement.src = ufo;
+        targetElement.classList.add(targetType);
+    } else if (targetType == 'bottle') {
+        targetElement.src = bottle;
+        targetElement.classList.add(targetType);
+    } else {
+        targetElement.classList.add(targetType);
+    }
+    
     return targetElement
 }
 
