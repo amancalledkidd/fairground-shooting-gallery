@@ -159,7 +159,7 @@ const gameTimer = (currentGame: GameStats) => {
 };
 
 const gameOver = (currentGame: GameStats): void => {
-    alert(`Game Over! Your score is ${currentGame.score}`);
+    // alert(`Game Over! Your score is ${currentGame.score}`);
     clearGameAreaAndListeners();
     const finalScore = document.createElement('h1');
     finalScore.classList.add('final__score');
@@ -176,4 +176,3 @@ const gameOver = (currentGame: GameStats): void => {
 };
 
 startButton.addEventListener('click', handleStartClick);
-
