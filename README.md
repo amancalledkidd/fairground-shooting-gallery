@@ -10,7 +10,7 @@ Shooting Array is a simple yet engaging point-and-click shooter game inspired by
 ## Features
 - **Dynamic Targets**: Targets move smoothly horizontally or vertically on the screen, with some even popping up in random locations to keep players on their toes.
 - **Scoring System**: Each successful hit earns points, and the game features a multiplier for consecutive hits to reward sharpshooters with quick reflexes and precise aim.
-- **Sleek Animations**: Smooth animations for target movements and interactions, ensuring an immersive gameplay experience.
+- **Animations**: Smooth animations for target movements and interactions, ensuring an good gameplay experience.
 - **Responsive Design**: Crafted to provide a seamless experience across various devices, ensuring players can enjoy the game anytime, anywhere.
 
 ## How to Play
@@ -18,7 +18,6 @@ Shooting Array is a simple yet engaging point-and-click shooter game inspired by
 2. **Aim**: Move your cursor to aim at the moving or pop-up targets on the screen.
 3. **Shoot**: Click or tap to shoot. Accuracy is key, so make sure to line up your shots carefully.
 4. **Score Points**: Hit targets to score points. Consecutive hits increase your multiplier, boosting your score even further.
-5. **Keep Practicing**: The more you play, the better you'll become at anticipating target movements and maximizing your score.
 
 ### Prerequisites
 
